@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/wuliuDataSource"/>
+    </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="mappingLocations">
+            <list>
+
+
+                <value>classpath:sx/me/po/Address.hbm.xml</value>
+                <value>classpath:sx/me/po/Board.hbm.xml</value>
+                <value>classpath:sx/me/po/CarInfo.hbm.xml</value>
+                <value>classpath:sx/me/po/Company.hbm.xml</value>
+                <value>classpath:sx/me/po/Consignee.hbm.xml</value>
+                <value>classpath:sx/me/po/Dept.hbm.xml</value>
+                <value>classpath:sx/me/po/DriverInfo.hbm.xml</value>
+                <value>classpath:sx/me/po/Factory.hbm.xml</value>
+                <value>classpath:sx/me/po/Goods.hbm.xml</value>
+                <value>classpath:sx/me/po/GoodsBack.hbm.xml</value>
+                <value>classpath:sx/me/po/GoodsDamage.hbm.xml</value>
+                <value>classpath:sx/me/po/GoodsPeiqian.hbm.xml</value>
+                <value>classpath:sx/me/po/GoodsShaoqian.hbm.xml</value>
+                <value>classpath:sx/me/po/MarketInfo.hbm.xml</value>
+                <value>classpath:sx/me/po/Role.hbm.xml</value>
+                <value>classpath:sx/me/po/RoleUser.hbm.xml</value>
+                <value>classpath:sx/me/po/TrafficBill.hbm.xml</value>
+                <value>classpath:sx/me/po/TrafficPrice.hbm.xml</value>
+                <value>classpath:sx/me/po/User.hbm.xml</value>
+                <value>classpath:sx/me/po/WayBill.hbm.xml</value>
+                <value>classpath:sx/me/po/Address.hbm.xml</value>
+                <value>classpath:sx/me/po/CarInfo.hbm.xml</value>
+                <value>classpath:sx/me/po/Consignee.hbm.xml</value>
+                <value>classpath:sx/me/po/DriverInfo.hbm.xml</value>
+                <value>classpath:sx/me/po/Goods.hbm.xml</value>
+                <value>classpath:sx/me/po/GoodsDamage.hbm.xml</value>
+                <value>classpath:sx/me/po/GoodsShaoqian.hbm.xml</value>
+                <value>classpath:sx/me/po/Role.hbm.xml</value>
+                <value>classpath:sx/me/po/TrafficBill.hbm.xml</value>
+                <value>classpath:sx/me/po/User.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <value>
+                <!-- hibernate.hbm2ddl.auto=update -->
+                hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+                hibernate.show_sql=true
+                hibernate.format_sql=true
+                hibernate.connection.autocommit=true
+            </value>
+
+
+        </property>
+        <property name="annotatedClasses">
+            <list>
+
+                <value>sx.me.po.Address</value>
+                <value>sx.me.po.Board</value>
+                <value>sx.me.po.CarInfo</value>
+                <value>sx.me.po.Company</value>
+                <value>sx.me.po.Consignee</value>
+                <value>sx.me.po.Dept</value>
+                <value>sx.me.po.DriverInfo</value>
+                <value>sx.me.po.Factory</value>
+                <value>sx.me.po.Goods</value>
+                <value>sx.me.po.GoodsBack</value>
+                <value>sx.me.po.GoodsDamage</value>
+                <value>sx.me.po.GoodsPeiqian</value>
+                <value>sx.me.po.GoodsShaoqian</value>
+                <value>sx.me.po.MarketInfo</value>
+                <value>sx.me.po.Role</value>
+                <value>sx.me.po.RoleUser</value>
+                <value>sx.me.po.TrafficBill</value>
+                <value>sx.me.po.TrafficPrice</value>
+                <value>sx.me.po.User</value>
+                <value>sx.me.po.WayBill</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="add*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="del*" propagation="REQUIRED" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="page*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="createHQLQuery" propagation="REQUIRED" />
+            <tx:method name="createSQLQuery" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="txPointcut" expression="execution(* sx.me.service.*.*(..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut"/>
+    </aop:config>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

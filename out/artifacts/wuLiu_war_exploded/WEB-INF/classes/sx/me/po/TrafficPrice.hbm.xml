@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.TrafficPrice" table="traffic_price" schema="wuliu">
+        <id name="trafficePriceId">
+            <column name="traffice_price_id" sql-type="int(11)"/>
+        </id>
+        <property name="startPlace">
+            <column name="start_place" sql-type="int(10)"/>
+        </property>
+        <property name="finalPlace">
+            <column name="final_place" sql-type="int(10)"/>
+        </property>
+        <property name="trafficTime">
+            <column name="traffic_time" sql-type="datetime"/>
+        </property>
+        <property name="ruleFangliang">
+            <column name="rule_fangliang" sql-type="int(11)"/>
+        </property>
+        <property name="ruleDunliang">
+            <column name="rule_dunliang" sql-type="int(10)"/>
+        </property>
+    </class>
+</hibernate-mapping>

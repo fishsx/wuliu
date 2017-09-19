@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.Company" table="company" schema="wuliu">
+        <id name="companyId">
+            <column name="company_id" sql-type="int(11)"/>
+        </id>
+        <property name="companyName">
+            <column name="companyName" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="companyAddress">
+            <column name="companyAddress" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="companyLeader">
+            <column name="companyLeader" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="companyPhone">
+            <column name="companyPhone" sql-type="varchar(20)" length="20"/>
+        </property>
+        <set name="carInfosByCompanyId" inverse="true">
+            <key>
+                <column name="car_company"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.CarInfo"/>
+        </set>
+        <set name="driverInfosByCompanyId" inverse="true">
+            <key>
+                <column name="driver_company"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.DriverInfo"/>
+        </set>
+        <set name="usersByCompanyId" inverse="true">
+            <key>
+                <column name="company_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.User"/>
+        </set>
+    </class>
+</hibernate-mapping>

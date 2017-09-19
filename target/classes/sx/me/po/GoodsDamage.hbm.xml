@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.GoodsDamage" table="goods_damage" schema="wuliu">
+        <id name="damageId">
+            <column name="damage_id" sql-type="int(11)"/>
+        </id>
+        <property name="damageReason">
+            <column name="damage_reason" sql-type="varchar(300)" length="300"/>
+        </property>
+        <property name="damageMoney">
+            <column name="damage_money" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <many-to-one name="wayBillByBillId" class="sx.me.po.WayBill" lazy="false" fetch="select" outer-join="true">
+            <column name="bill_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

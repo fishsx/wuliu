@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.CarInfo" table="car_info" schema="wuliu">
+        <id name="carId">
+            <column name="car_id" sql-type="int(11)"/>
+        </id>
+        <property name="carType">
+            <column name="car_type" sql-type="varchar(10)"/>
+        </property>
+        <property name="carFangliang">
+            <column name="car_fangliang" sql-type="int(10)"/>
+        </property>
+        <property name="carDunliang">
+            <column name="car_dunliang" sql-type="int(10)"/>
+        </property>
+        <property name="carChepai">
+            <column name="car_chepai" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="carDriverLicense">
+            <column name="car_driver_license" sql-type="varchar(30)" length="30"/>
+        </property>
+        <property name="carState">
+            <column name="car_state" sql-type="int(4)"/>
+        </property>
+        <many-to-one name="companyByCarCompany" class="sx.me.po.Company" lazy="false" fetch="select" outer-join="true">
+            <column name="car_company"/>
+        </many-to-one>
+        <set name="marketInfosByCarId" inverse="true">
+            <key>
+                <column name="market_car"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.MarketInfo"/>
+        </set>
+        <set name="trafficBillsByCarId" inverse="true">
+            <key>
+                <column name="car"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.TrafficBill"/>
+        </set>
+    </class>
+</hibernate-mapping>

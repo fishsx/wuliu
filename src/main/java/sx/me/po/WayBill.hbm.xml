@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.WayBill" table="way_bill" schema="wuliu">
+        <id name="wayBillId">
+            <column name="wayBill_id" sql-type="int(11)"/>
+            <generator class="increment"/>
+        </id>
+        <property name="billStartPlace">
+            <column name="bill_start_place" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="billFinalPlace">
+            <column name="bill_final_place" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="billYunfei">
+            <column name="bill_yunfei" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="billShaoqian">
+            <column name="bill_shaoqian" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="billPeiqian">
+            <column name="bill_peiqian" sql-type="float" precision="-1" not-null="true"/>
+        </property>
+        <property name="billPayType">
+            <column name="bill_pay_type" sql-type="int(10)"/>
+        </property>
+        <property name="billPayState">
+            <column name="bill_pay_state" sql-type="int(11)"/>
+        </property>
+        <property name="billState">
+            <column name="bill_state" sql-type="int(11)"/>
+        </property>
+        <property name="billTrafficId">
+            <column name="bill_traffic_id" sql-type="int(11)"/>
+        </property>
+        <many-to-one name="factoryByBillFactoryId" class="sx.me.po.Factory" lazy="false" fetch="select" outer-join="true">
+            <column name="bill_factory_id"/>
+        </many-to-one>
+        <many-to-one name="consigneeByBillPerson" class="sx.me.po.Consignee" lazy="false" fetch="select" outer-join="true">
+            <column name="bill_person"/>
+        </many-to-one>
+        <many-to-one name="goodsByBillGoodId" class="sx.me.po.Goods" lazy="false" fetch="select" outer-join="true">
+            <column name="bill_goodID"/>
+        </many-to-one>
+        <set name="goodsBacksByWayBillId" inverse="true">
+            <key>
+                <column name="way_bill_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.GoodsBack"/>
+        </set>
+        <set name="goodsDamagesByWayBillId" inverse="true">
+            <key>
+                <column name="bill_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.GoodsDamage"/>
+        </set>
+        <set name="goodsPeiqiansByWayBillId" inverse="true">
+            <key>
+                <column name="way_bill_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.GoodsPeiqian"/>
+        </set>
+        <set name="goodsShaoqiansByWayBillId" inverse="true">
+            <key>
+                <column name="wayBill_Id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.GoodsShaoqian"/>
+        </set>
+        <set name="trafficBillsByWayBillId" inverse="true">
+            <key>
+                <column name="wayBill_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.TrafficBill"/>
+        </set>
+    </class>
+</hibernate-mapping>

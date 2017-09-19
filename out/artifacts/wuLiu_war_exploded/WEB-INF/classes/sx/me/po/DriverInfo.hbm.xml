@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.DriverInfo" table="driver_info" schema="wuliu">
+        <id name="driverId">
+            <column name="driver_id" sql-type="int(11)"/>
+        </id>
+        <property name="driverName">
+            <column name="driver_name" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="driverSex">
+            <column name="driver_sex" sql-type="char(2)" length="2"/>
+        </property>
+        <property name="driverBirthday">
+            <column name="driver_birthday" sql-type="date"/>
+        </property>
+        <property name="driverLicenseType">
+            <column name="driver_license_type" sql-type="char(10)" length="10"/>
+        </property>
+        <property name="driverLicense">
+            <column name="driver_license" sql-type="String(20)"/>
+        </property>
+        <property name="driverState">
+            <column name="driver_state" sql-type="int(10)"/>
+        </property>
+        <many-to-one name="companyByDriverCompany" class="sx.me.po.Company" lazy="false" fetch="select" outer-join="true">
+            <column name="driver_company"/>
+        </many-to-one>
+        <set name="marketInfosByDriverId" inverse="true">
+            <key>
+                <column name="market_driver"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.MarketInfo"/>
+        </set>
+        <set name="trafficBillsByDriverId" inverse="true">
+            <key>
+                <column name="driver"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.TrafficBill"/>
+        </set>
+    </class>
+</hibernate-mapping>

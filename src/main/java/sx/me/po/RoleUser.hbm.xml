@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.RoleUser" table="role_user" schema="wuliu">
+        <id name="roleUserId">
+            <column name="role_user_id" sql-type="int(11)"/>
+        </id>
+        <many-to-one name="userByUserId" class="sx.me.po.User">
+            <column name="user_id"/>
+        </many-to-one>
+        <many-to-one name="roleByRoleId" class="sx.me.po.Role">
+            <column name="role_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

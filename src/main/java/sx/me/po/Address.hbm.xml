@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.Address" table="address" schema="wuliu">
+        <id name="addressId">
+            <column name="address_id" sql-type="int(11)"/>
+        </id>
+        <property name="addressShengfen">
+            <column name="address_shengfen" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="addressChengshi">
+            <column name="address_chengshi" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="addressQu">
+            <column name="address_qu" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="addressJiedao">
+            <column name="address_jiedao" sql-type="varchar(20)" length="20"/>
+        </property>
+    </class>
+</hibernate-mapping>

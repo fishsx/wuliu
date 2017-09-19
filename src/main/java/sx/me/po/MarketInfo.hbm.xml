@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.MarketInfo" table="market_info" schema="wuliu">
+        <id name="marketId">
+            <column name="market_id" sql-type="int(11)"/>
+        </id>
+        <property name="marketCost">
+            <column name="market_cost" sql-type="float" precision="-1"/>
+        </property>
+        <property name="marketState">
+            <column name="market_state" sql-type="int(4)"/>
+        </property>
+        <many-to-one name="goodsByMarketGoodid" class="sx.me.po.Goods">
+            <column name="market_goodid"/>
+        </many-to-one>
+        <many-to-one name="consigneeByMarketConsignee" class="sx.me.po.Consignee">
+            <column name="market_consignee"/>
+        </many-to-one>
+        <many-to-one name="driverInfoByMarketDriver" class="sx.me.po.DriverInfo">
+            <column name="market_driver"/>
+        </many-to-one>
+        <many-to-one name="carInfoByMarketCar" class="sx.me.po.CarInfo">
+            <column name="market_car"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.Role" table="role" schema="wuliu">
+        <id name="roleId">
+            <column name="role_id" sql-type="int(11)"/>
+        </id>
+        <property name="roleName">
+            <column name="role_name" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="roleRoot">
+            <column name="role_root" sql-type="int(2)"/>
+        </property>
+        <set name="roleUsersByRoleId" inverse="true">
+            <key>
+                <column name="role_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.RoleUser"/>
+        </set>
+    </class>
+</hibernate-mapping>

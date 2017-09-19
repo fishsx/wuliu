@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.Factory" table="factory" schema="wuliu">
+        <id name="factoryId">
+            <column name="factory_id" sql-type="int(11)"/>
+        </id>
+        <property name="factoryName">
+            <column name="factory_name" sql-type="varchar(30)" length="30"/>
+        </property>
+        <property name="factoryLeader">
+            <column name="factory_leader" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="factoryPhone">
+            <column name="factory_phone" sql-type="varchar(20)" length="20" not-null="true"/>
+        </property>
+        <property name="factoryEmail">
+            <column name="factory_email" sql-type="varchar(30)" length="30" not-null="true"/>
+        </property>
+        <property name="factoryAddress">
+            <column name="factory_address" sql-type="varchar(50)" length="50"/>
+        </property>
+        <set name="wayBillsByFactoryId" inverse="true">
+            <key>
+                <column name="bill_factory_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.WayBill"/>
+        </set>
+    </class>
+</hibernate-mapping>

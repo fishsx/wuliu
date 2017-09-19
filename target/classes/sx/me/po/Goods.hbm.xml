@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.Goods" table="goods" schema="wuliu">
+        <id name="goodId">
+            <column name="good_id" sql-type="int(11)"/>
+            <generator class="increment"/>
+        </id>
+        <property name="goodName">
+            <column name="good_name" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="goodRuleType">
+            <column name="good_rule_type" sql-type="int(10)"/>
+        </property>
+        <property name="goodNumType">
+            <column name="good_num_type" sql-type="char(2)" length="2"/>
+        </property>
+        <property name="goodNum">
+            <column name="good_num" sql-type="int(10)"/>
+        </property>
+        <property name="goodCount">
+            <column name="good_count" sql-type="float(30)" precision="30" not-null="true"/>
+        </property>
+        <property name="goodBaojia">
+            <column name="good_baojia" sql-type="float(30)" precision="30" not-null="true"/>
+        </property>
+        <set name="marketInfosByGoodId" inverse="true">
+            <key>
+                <column name="market_goodid"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.MarketInfo"/>
+        </set>
+        <set name="wayBillsByGoodId" inverse="true">
+            <key>
+                <column name="bill_goodID"/>
+            </key>
+            <one-to-many not-found="ignore" class="sx.me.po.WayBill"/>
+        </set>
+    </class>
+</hibernate-mapping>

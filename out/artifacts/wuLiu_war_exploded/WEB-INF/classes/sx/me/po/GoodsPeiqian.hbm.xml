@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.GoodsPeiqian" table="goods_peiqian" schema="wuliu">
+        <id name="peiqianId">
+            <column name="peiqian_id" sql-type="int(11)"/>
+        </id>
+        <property name="peiqianMoney">
+            <column name="peiqian_money" sql-type="float" precision="-1"/>
+        </property>
+        <property name="peiqianState">
+            <column name="peiqian_state" sql-type="int(4)"/>
+        </property>
+        <many-to-one name="wayBillByWayBillId" class="sx.me.po.WayBill" lazy="false" fetch="select" outer-join="true">
+            <column name="way_bill_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

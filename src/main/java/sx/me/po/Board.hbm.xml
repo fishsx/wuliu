@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="sx.me.po.Board" table="board" schema="wuliu">
+        <id name="boardId">
+            <column name="board_id" sql-type="int(11)"/>
+        </id>
+        <property name="boardTitle">
+            <column name="board_title" sql-type="varchar(20)" length="20"/>
+        </property>
+        <property name="boardContent">
+            <column name="board_content" sql-type="varchar(500)" length="500"/>
+        </property>
+        <property name="boardRegtime">
+            <column name="board_Regtime" sql-type="datetime"/>
+        </property>
+    </class>
+</hibernate-mapping>
